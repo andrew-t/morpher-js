@@ -1777,6 +1777,17 @@
       if (excess > 0) {
         height -= excess;
       }
+      excess = left + width - sourceBitmap.width;
+      if (excess > 0) {
+        width -= excess;
+      }
+      excess = top + height - sourceBitmap.height;
+      if (excess > 0) {
+        height -= excess;
+      }
+      if (width < 0 || height < 0) {
+        return;
+      }
       destinationCtx.drawImage(sourceBitmap, left, top, width, height, left, top, width, height);
       return destinationCtx.restore();
     };
