@@ -1718,7 +1718,7 @@
     };
 
     Triangle.prototype.draw = function(sourceBitmap, destinationCtx, destinationTriangle) {
-      var bottom, from, height, left, matr1, matr2, point, points, right, rotation2, scaleX, scaleY, state2, state3, to, top, width, _i, _len, _ref, _ref1;
+      var bottom, excess, from, height, left, matr1, matr2, point, points, right, rotation2, scaleX, scaleY, state2, state3, to, top, width, _i, _len, _ref, _ref1;
       _ref = this.getBounds(), left = _ref[0], top = _ref[1], right = _ref[2], bottom = _ref[3];
       width = right - left;
       height = bottom - top;
@@ -1768,6 +1768,14 @@
       if (top < 0) {
         height += top;
         top = 0;
+      }
+      excess = left + width - destinationCtx.canvas.width;
+      if (excess > 0) {
+        width -= excess;
+      }
+      excess = top + height - destinationCtx.canvas.height;
+      if (excess > 0) {
+        height -= excess;
       }
       destinationCtx.drawImage(sourceBitmap, left, top, width, height, left, top, width, height);
       return destinationCtx.restore();
